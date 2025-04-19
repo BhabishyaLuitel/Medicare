@@ -94,7 +94,7 @@ switch($method) {
                     $mail->Password = 'qwse glwu bhpx vyvz'; // Replace with App Password
                     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
                     $mail->Port = 587;
-                    $mail->SMTPDebug = 2; // Enable verbose debug output
+                    // $mail->SMTPDebug = 2; // Enable verbose debug output
 
                     // Recipients
                     $mail->setFrom('bhabishyaluitel@gmail.com', 'Medicare System');
