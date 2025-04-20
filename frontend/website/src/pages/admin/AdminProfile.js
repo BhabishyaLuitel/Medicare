@@ -1,3 +1,4 @@
+import { APP_URL } from '../../App';
 import AdminSidebar from '../../components/AdminSidebar';
 import React, { useState, useEffect } from 'react';
 
@@ -23,7 +24,7 @@ export default function AdminProfile() {
         }
 
         const response = await fetch(
-          `http://localhost/backend/api/adminprofile.php/${UserID}`,
+          `${APP_URL}/adminprofile.php/${UserID}`,
           {
             method: 'GET',
             headers: {

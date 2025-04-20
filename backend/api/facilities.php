@@ -1,5 +1,6 @@
 <?php
 require_once 'cors.php';
+require 'vendor/autoload.php';
 
 class DbConnect {
     private $server = 'localhost';
@@ -22,9 +23,10 @@ $objDb = new DbConnect();
 $conn = $objDb->connect();
 
 // Handle preflight requests
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    exit(0);
-}
+// if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+//     http_response_code(200);
+//     exit(0);
+// }
 
 // Fetch facilities data
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {

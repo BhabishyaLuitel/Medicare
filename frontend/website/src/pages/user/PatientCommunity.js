@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 const PatientCommunity = () => {
   const [blogs, setBlogs] = useState([]);
@@ -18,7 +19,7 @@ const PatientCommunity = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/fetchBlogs.php'
+        `${APP_URL}/fetchBlogs.php`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch blogs');

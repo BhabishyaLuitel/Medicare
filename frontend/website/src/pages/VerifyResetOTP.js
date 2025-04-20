@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import appLogo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { APP_URL } from '../App';
 
 const VerifyResetOTP = () => {
   const [otp, setOtp] = useState('');
@@ -26,12 +27,10 @@ const VerifyResetOTP = () => {
         formData.append('check', true);
         formData.append('otp', otpValue);
         const response = await fetch(
-          'http://localhost/backend/api/reset-code.php',
+          `${APP_URL}/reset-code.php`,
           {
             method: 'POST',
             body: formData,
-            credentials: 'include',
-            mode: 'cors',
           }
         );
 

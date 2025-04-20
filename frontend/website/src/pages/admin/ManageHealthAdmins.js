@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import AdminSidebar from '../../components/AdminSidebar';
+import { APP_URL } from '../../App';
 
 const ManageHealthAdmins = () => {
   const [has, setHealthAdmins] = useState([]);
@@ -12,7 +13,7 @@ const ManageHealthAdmins = () => {
 
   const fetchHealthAdmins = async () => {
     try {
-      const response = await fetch('http://localhost/backend/api/gethas.php', {
+      const response = await fetch(`${APP_URL}/gethas.php`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ const ManageHealthAdmins = () => {
 
   const handleToggleStatus = async (ID) => {
     try {
-      const response = await fetch('http://localhost/backend/api/gethas.php', {
+      const response = await fetch(`${APP_URL}/gethas.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

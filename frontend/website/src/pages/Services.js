@@ -8,6 +8,7 @@ import AccessibilityImage from '../images/accessibility.jpg';
 import MentalHealthSupportImage from '../images/serviceImage1.jpg';
 import WellnessPreventionImage from '../images/serviceImage2.jpg';
 import ResearchInnovationImage from '../images/serviceImage3.png';
+import { APP_URL } from '../App';
 
 const Services = () => {
   const [facilities, setFacilities] = useState({});
@@ -16,12 +17,11 @@ const Services = () => {
   useEffect(() => {
     const fetchFacilities = async () => {
       try {
-        const res = await fetch('http://localhost/backend/api/facilities.php', {
+        const res = await fetch(`${APP_URL}/facilities.php`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include',
         });
 
         if (!res.ok) {

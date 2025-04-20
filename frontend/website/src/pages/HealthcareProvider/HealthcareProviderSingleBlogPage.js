@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import HealthcareProviderSidebar from '../../components/HealthcareProviderSidebar';
 import { FaTrash } from 'react-icons/fa'; // Import trash icon from react-icons library
+import { APP_URL } from '../../App';
 
 const PatientSingleBlogPage = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const PatientSingleBlogPage = () => {
   const fetchBlog = async () => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/fetchBlogs.php?id=${id}`
+        `${APP_URL}/fetchBlogs.php?id=${id}`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch blog');
@@ -36,7 +37,7 @@ const PatientSingleBlogPage = () => {
   const fetchComments = async () => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/fetchComments.php?blogId=${id}`
+        `${APP_URL}/fetchComments.php?blogId=${id}`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch comments');
@@ -53,7 +54,7 @@ const PatientSingleBlogPage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        'http://localhost/backend/api/addComment.php',
+        `${APP_URL}/addComment.php`,
         {
           method: 'POST',
           headers: {
@@ -80,7 +81,7 @@ const PatientSingleBlogPage = () => {
   const handleDelete = async (commentId) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/deleteComment.php',
+        `${APP_URL}/deleteComment.php`,
         {
           method: 'DELETE',
           headers: {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 const PrescriptionPage = () => {
   // State to store prescriptions data and selected prescription
@@ -30,7 +31,7 @@ const PrescriptionPage = () => {
 
         // Fetch data from PHP endpoint with the user ID as a query parameter
         const response = await fetch(
-          `http://localhost/backend/api/fetchPrescriptions.php?userID=${userId}`
+          `${APP_URL}/fetchPrescriptions.php?userID=${userId}`
         );
         if (!response.ok) {
           throw new Error('Failed to fetch prescriptions data');

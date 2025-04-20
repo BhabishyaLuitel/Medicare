@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HealthAdministratorSidebar from '../../components/HealthAdministratorSidebar';
+import { APP_URL } from '../../App';
 
 const FacilitiesPage = () => {
   const [facilities, setFacilities] = useState({});
@@ -11,12 +12,11 @@ const FacilitiesPage = () => {
   useEffect(() => {
     const fetchFacilities = async () => {
       try {
-        const res = await fetch('http://localhost/backend/api/facilities.php', {
+        const res = await fetch(`${APP_URL}/facilities.php`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include',
         });
 
         if (!res.ok) {
@@ -49,12 +49,11 @@ const FacilitiesPage = () => {
 
   const handleSave = async () => {
     try {
-      const res = await fetch('http://localhost/backend/api/facilities.php', {
+      const res = await fetch(`${APP_URL}/facilities.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        credentials: 'include',
         body: JSON.stringify(editableFacilities),
       });
 

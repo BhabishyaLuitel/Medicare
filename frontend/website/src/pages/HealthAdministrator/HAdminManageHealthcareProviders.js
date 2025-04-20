@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes, FaEdit } from 'react-icons/fa';
 import HealthAdministratorSidebar from '../../components/HealthAdministratorSidebar';
+import { APP_URL } from '../../App';
 
 const ManageHealthcareProviders = () => {
   const [hcps, setHCPs] = useState([]);
@@ -13,7 +14,7 @@ const ManageHealthcareProviders = () => {
 
   const fetchHCPs = async () => {
     try {
-      const response = await fetch('http://localhost/backend/api/gethcps.php', {
+      const response = await fetch(`${APP_URL}/gethcps.php`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ const ManageHealthcareProviders = () => {
 
   const handleToggleStatus = async (ID) => {
     try {
-      const response = await fetch('http://localhost/backend/api/gethcps.php', {
+      const response = await fetch(`${APP_URL}/gethcps.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ const ManageHealthcareProviders = () => {
     try {
       // Send POST request to update healthcare provider details
       const response = await fetch(
-        'http://localhost/backend/api/updatehcp.php',
+        `${APP_URL}/updatehcp.php`,
         {
           method: 'POST',
           headers: {

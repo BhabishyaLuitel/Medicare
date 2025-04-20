@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import appLogo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { APP_URL } from '../App';
 
 const ChangePassword = () => {
   const [password, setPassword] = useState('');
@@ -38,14 +39,13 @@ const ChangePassword = () => {
 
     try {
       const response = await fetch(
-        'http://localhost/backend/api/password-change.php',
+        `${APP_URL}/password-change.php`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
           },
           body: data,
-          credentials: 'include',
           mode: 'cors',
         }
       );

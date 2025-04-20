@@ -1,18 +1,19 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import AdminSidebar from '../../components/AdminSidebar';
+import { APP_URL } from '../../App';
 
 const AdminDashboard = () => {
   const [response, setResponse] = useState({});
+  const [alert, setAlert] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost/backend/api/admindash.php', {
+        const res = await fetch(`${APP_URL}/admindash.php`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include',
         });
 
         if (!res.ok) {
@@ -28,6 +29,32 @@ const AdminDashboard = () => {
 
     fetchData();
   }, []);
+
+  const handleGeneratePDF = async () => {
+    try {
+      const res = await fetch(`${APP_URL}/admindash.php`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!res.ok) {
+        throw new Error('Failed to generate PDF.');
+      }
+
+      const data = await res.json();
+      setAlert(data.message);
+
+      // Download the PDF
+      const link = document.createElement('a');
+      link.href = `${APP_URL}/${data.file}`;
+      link.download = 'Management_Report.pdf';
+      link.click();
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+    }
+  };
 
   return (
     <Fragment>
@@ -104,6 +131,24 @@ const AdminDashboard = () => {
                         </div>
                       </div>
                     </div>
+                    <button
+                      onClick={handleGeneratePDF}
+                      style={{
+                        backgroundColor: '#007bff',
+                        color: 'white',
+                        padding: '10px',
+                        borderRadius: '5px',
+                        cursor: 'pointer',
+                        marginTop: '20px',
+                      }}
+                    >
+                      Generate PDF Report
+                    </button>
+                    {alert && (
+                      <div style={{ marginTop: '10px', color: 'green' }}>
+                        {alert}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

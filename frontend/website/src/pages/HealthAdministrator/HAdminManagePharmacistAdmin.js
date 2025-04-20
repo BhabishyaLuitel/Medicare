@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import HealthAdministratorSidebar from '../../components/HealthAdministratorSidebar';
+import { APP_URL } from '../../App';
 
 const ManagePharmacistAdmin = () => {
   const [pharmacists, setPharmacists] = useState([]);
@@ -13,7 +14,7 @@ const ManagePharmacistAdmin = () => {
   const fetchPharmacists = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpharmacists.php',
+        `${APP_URL}/getpharmacists.php`,
         {
           method: 'GET',
           headers: {
@@ -38,7 +39,7 @@ const ManagePharmacistAdmin = () => {
   const handleToggleStatus = async (ID) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpharmacists.php',
+        `${APP_URL}/getpharmacists.php`,
         {
           method: 'POST',
           headers: {

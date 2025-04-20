@@ -4,6 +4,7 @@ import faceImage from '../adminImages/faces/face8.jpg';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { IoMdClose } from 'react-icons/io';
 import { FiLogOut } from 'react-icons/fi';
+import { APP_URL } from '../App';
 
 export default function AdminSidebar() {
   const [adminDetails, setAdminDetails] = useState({
@@ -26,7 +27,7 @@ export default function AdminSidebar() {
         }
 
         const response = await fetch(
-          `http://localhost/backend/api/adminprofile.php/${UserID}`,
+          `${APP_URL}/adminprofile.php/${UserID}`,
           {
             method: 'GET',
             headers: {
@@ -136,6 +137,11 @@ export default function AdminSidebar() {
               <span className="nav-link">Dashboard</span>
             </li>
             <li className="nav-item">
+              <CustomLink to="/register-patient" className="nav-link">
+                Register patient
+              </CustomLink>
+            </li>
+            <li className="nav-item">
               <CustomLink to="/ManagePatientAdmin" className="nav-link">
                 Manage Patients
               </CustomLink>
@@ -169,7 +175,7 @@ export default function AdminSidebar() {
               <span className="nav-link">Chat</span>
             </li>
             <li className="nav-item">
-              <CustomLink to="/Chat" className="nav-link">
+              <CustomLink to="/admin-chat" className="nav-link">
                 <span className="menu-title">Chat</span>
                 <i className="icon-screen-desktop menu-icon"></i>
               </CustomLink>

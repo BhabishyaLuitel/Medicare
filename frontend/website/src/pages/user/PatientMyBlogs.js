@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 const PatientMyBlogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -18,7 +19,7 @@ const PatientMyBlogs = () => {
   const fetchBlogs = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/fetchBlogs.php'
+        `${APP_URL}/fetchBlogs.php`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch blogs');
@@ -50,7 +51,7 @@ const PatientMyBlogs = () => {
   const handleDelete = async (blogId) => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/deleteBlog.php?id=${blogId}`,
+        `${APP_URL}/deleteBlog.php?id=${blogId}`,
         {
           method: 'DELETE',
           headers: {

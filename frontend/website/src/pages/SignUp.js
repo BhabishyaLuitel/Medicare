@@ -114,14 +114,12 @@ const SignUp = () => {
 
     if (isValid) {
       try {
-        const response = await fetch('http://localhost:8000/index.php', {
+        const response = await fetch('http://localhost/medicare/backend/api/index.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData),
-          credentials: 'include',
-          mode: 'cors',
         });
 
         const data = await response.json();
@@ -305,14 +303,9 @@ const SignUp = () => {
                       >
                         <option value="">Select user type</option>
                         <option value="Admin">Admin</option>
-                        <option value="Patient">Patient</option>
-                        <option value="HealthcareProvider">
-                          Healthcare Provider
-                        </option>
+                        <option value="HealthcareProvider">Healthcare Provider</option>
                         <option value="Pharmacist">Pharmacist</option>
-                        <option value="HealthAdminstrator">
-                          Health Adminstrator
-                        </option>
+                        <option value="HealthAdminstrator">Health Adminstrator</option>
                       </select>
                       {formErrors.userType && (
                         <div className="text-danger">User type is required</div>

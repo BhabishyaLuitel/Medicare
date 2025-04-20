@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import HealthcareProviderSidebar from '../../components/HealthcareProviderSidebar';
+import { APP_URL } from '../../App';
 
 const PersonalRecordsPage = () => {
   const [records, setRecords] = useState([]);
@@ -21,7 +22,7 @@ const PersonalRecordsPage = () => {
   const fetchPersonalRecords = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getTblrecords.php'
+        `${APP_URL}/getTblrecords.php`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch personal records');

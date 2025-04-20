@@ -9,7 +9,7 @@ class DbConnect {
     private $server = 'localhost';
     private $dbname = 'medicare';
     private $user = 'root';
-    private $pass = '123Aayam123';
+    private $pass = '';
 
     public function connect() {
         try {
@@ -28,6 +28,9 @@ $conn = $objDb->connect();
 
 $method = $_SERVER['REQUEST_METHOD'];
 switch($method) {
+    case "OPTIONS":
+        http_response_code(200);
+        exit();
     case "GET":
         $sql = "SELECT * FROM tblusers";
         $path = explode('/', $_SERVER['REQUEST_URI']);

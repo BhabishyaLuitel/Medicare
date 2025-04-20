@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheck, FaTimes } from 'react-icons/fa';
 import AdminSidebar from '../../components/AdminSidebar';
+import { APP_URL } from '../../App';
 
 const ManagePatientAdmin = () => {
   const [patients, setPatients] = useState([]);
@@ -13,7 +14,7 @@ const ManagePatientAdmin = () => {
   const fetchPatients = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpatients.php',
+        `${APP_URL}/getpatients.php`,
         {
           method: 'GET',
           headers: {
@@ -38,7 +39,7 @@ const ManagePatientAdmin = () => {
   const handleToggleStatus = async (ID) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpatients.php',
+        `${APP_URL}/getpatients.php`,
         {
           method: 'POST',
           headers: {
@@ -78,8 +79,6 @@ const ManagePatientAdmin = () => {
                     <th>Sr. No.</th>
                     <th>Patient User Id</th>
                     <th>Patient Name</th>
-                    <th>Status</th>
-                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -89,23 +88,6 @@ const ManagePatientAdmin = () => {
                       <td>{patient.ID}</td>
                       <td>
                         {patient.FirstName} {patient.LastName}
-                      </td>
-                      <td>{patient.status}</td>
-                      <td>
-                        <button
-                          className="btn btn-success"
-                          onClick={() => handleToggleStatus(patient.ID)}
-                          disabled={patient.status === 'verified'}
-                        >
-                          <FaCheck />
-                        </button>
-                        <button
-                          className="btn btn-danger"
-                          onClick={() => handleToggleStatus(patient.ID)}
-                          disabled={patient.status === 'notverified'}
-                        >
-                          <FaTimes />
-                        </button>
                       </td>
                     </tr>
                   ))}

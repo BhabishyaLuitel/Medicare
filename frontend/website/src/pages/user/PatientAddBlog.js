@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { APP_URL } from '../../App';
 
 const AddBlog = () => {
   const [title, setTitle] = useState('');
@@ -9,7 +10,7 @@ const AddBlog = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost/backend/api/addBlog.php', {
+      const response = await fetch(`${APP_URL}/addBlog.php`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

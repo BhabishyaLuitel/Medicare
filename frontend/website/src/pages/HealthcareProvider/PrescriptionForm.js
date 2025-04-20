@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import HealthcareProviderSidebar from '../../components/HealthcareProviderSidebar';
+import { APP_URL } from '../../App';
 
 function PrescriptionForm() {
   // State variables
@@ -23,7 +24,7 @@ function PrescriptionForm() {
   const fetchPatients = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpatients.php'
+        `${APP_URL}/getpatients.php`
       );
       const data = await response.json();
       setPatients(data);
@@ -36,7 +37,7 @@ function PrescriptionForm() {
   const fetchPharmacists = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getpharmacists.php'
+        `${APP_URL}/getpharmacists.php`
       );
       const data = await response.json();
       setPharmacists(data);
@@ -82,7 +83,7 @@ function PrescriptionForm() {
 
     try {
       const response = await fetch(
-        'http://localhost/backend/api/createPrescription.php',
+        `${APP_URL}/createPrescription.php`,
         {
           method: 'POST',
           headers: {

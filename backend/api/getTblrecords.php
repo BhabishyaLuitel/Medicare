@@ -1,22 +1,6 @@
 <?php
 require_once 'cors.php';
-
-class DbConnect {
-    private $server = 'localhost';
-    private $dbname = 'medicare';
-    private $user = 'root';
-    private $pass = '';
-
-    public function connect() {
-        try {
-            $conn = new PDO("mysql:host=$this->server;dbname=$this->dbname", $this->user, $this->pass);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-        } catch (Exception $e) {
-            exit("Database Error: " . $e->getMessage());
-        }
-    }
-}
+require 'DbConnect.php';
 
 $objDb = new DbConnect();
 $conn = $objDb->connect();
@@ -33,10 +17,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit(0);
 }
 
-// Fetch all personal records
+// Fetch all patients and their personal records
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     try {
-        $sql = "SELECT * FROM tblpersonalrecords";
+        $sql = "SELECT 
+                    u.ID AS UserID, 
+                    u.FirstName, 
+                    u.LastName, 
+                    pr.BP, 
+                    pr.Diabetes, 
+                    pr.HeartHealthIssues, 
+                    pr.Arthritis, 
+                    pr.Allergies, 
+                    pr.OtherIssues 
+                FROM tblusers u
+                LEFT JOIN tblpersonalrecords pr ON u.ID = pr.UserID
+                WHERE u.UserType = 'Patient'";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $records = $stmt->fetchAll(PDO::FETCH_ASSOC);

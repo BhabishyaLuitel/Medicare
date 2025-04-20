@@ -15,6 +15,7 @@ import {
 import { Delete as DeleteIcon } from '@mui/icons-material';
 import PatientSidebar from '../../components/PatientSidebar';
 import { useNavigate } from 'react-router-dom';
+import { APP_URL } from '../../App';
 
 function MedicationReminder() {
   const [userId, setUserId] = useState(null);
@@ -41,7 +42,7 @@ function MedicationReminder() {
   const fetchReminders = async (UserID) => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/reminders.php?userID=${UserID}`
+        `${APP_URL}/reminders.php?userID=${UserID}`
       );
       if (!response.ok) {
         throw new Error('Failed to fetch reminders');
@@ -65,7 +66,7 @@ function MedicationReminder() {
 
     try {
       const response = await fetch(
-        'http://localhost/backend/api/reminders.php',
+        `${APP_URL}/reminders.php`,
         {
           method: 'POST',
           headers: {
@@ -101,7 +102,7 @@ function MedicationReminder() {
   const deleteReminder = async (reminderID) => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/reminders.php?reminderID=${reminderID}`,
+        `${APP_URL}/reminders.php?reminderID=${reminderID}`,
         {
           method: 'DELETE',
         }

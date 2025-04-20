@@ -1,5 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import HealthcareProviderSidebar from '../../components/HealthcareProviderSidebar';
+import { APP_URL } from '../../App';
 
 const AdminDashboard = () => {
   const [response, setResponse] = useState({});
@@ -7,12 +8,11 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch('http://localhost/backend/api/admindash.php', {
+        const res = await fetch(`${APP_URL}/admindash.php`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          credentials: 'include',
         });
 
         if (!res.ok) {

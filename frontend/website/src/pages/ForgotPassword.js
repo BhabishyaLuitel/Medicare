@@ -2,6 +2,7 @@ import React, { Fragment, useState } from 'react';
 import appLogo from '../images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { APP_URL } from '../App';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -18,14 +19,13 @@ const ForgotPassword = () => {
 
     try {
       const response = await fetch(
-        'http://localhost/backend/api/resetpassword.php',
+        `${APP_URL}/resetpassword.php`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({ email }),
-          credentials: 'include',
           mode: 'cors',
         }
       );

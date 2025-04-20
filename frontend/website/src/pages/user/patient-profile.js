@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 export default function PatientProfile() {
   const [adminDetails, setAdminDetails] = useState({
@@ -23,7 +24,7 @@ export default function PatientProfile() {
         }
 
         const response = await fetch(
-          `http://localhost/backend/api/adminprofile.php/${UserID}`,
+          `${APP_URL}/adminprofile.php/${UserID}`,
           {
             method: 'GET',
             headers: {

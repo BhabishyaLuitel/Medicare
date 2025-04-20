@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaServer } from 'react-icons/fa';
 import HealthAdministratorSidebar from '../../components/HealthAdministratorSidebar';
+import { APP_URL } from '../../App';
 
 function DataOversight() {
   const [userCounts, setUserCounts] = useState({
@@ -18,7 +19,7 @@ function DataOversight() {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/getverified.php'
+        `${APP_URL}/getverified.php`
       );
       const data = await response.json();
       setUserCounts(data);
@@ -51,14 +52,14 @@ function DataOversight() {
           <h2>Server Status</h2>
           <div className="server-box">
             <div className="status-info">
-              <span>Domain: http://localhost/backend/api/</span>
+              <span>Domain: {APP_URL}/</span>
               <FaServer className="server-icon online" />
               <span>Status: ONLINE</span>
             </div>
           </div>
           <div className="server-box">
             <div className="status-info">
-              <span>Domain: http://localhost/backend/api/</span>
+              <span>Domain: {APP_URL}/</span>
               <FaServer className="server-icon online" />
               <span>Status: ONLINE</span>
             </div>

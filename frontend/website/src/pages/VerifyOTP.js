@@ -26,12 +26,10 @@ const VerifyOTP = () => {
         formData.append('check', true);
         formData.append('otp', otpValue);
         const response = await fetch(
-          'http://localhost/backend/api/verifyotp.php',
+          'http://localhost/medicare/backend/api/verifyotp.php',
           {
             method: 'POST',
             body: formData, // Send OTP to server
-            credentials: 'include',
-            mode: 'cors',
           }
         );
 

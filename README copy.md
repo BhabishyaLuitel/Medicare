@@ -160,4 +160,4 @@ The application will open automatically in your default browser at `http://local
 1. If you see a CORS error:
 
    - Make sure XAMPP's Apache service is running
-   - Check if the backend API is accessible at `http://localhost/backend/api`
+   - Check if the backend API is accessible at `http://localhost/medicare/backend/api`

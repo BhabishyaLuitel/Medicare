@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import HealthcareProviderSidebar from '../../components/HealthcareProviderSidebar';
+import { APP_URL } from '../../App';
 
 const Content = styled('div')({
   marginLeft: '10px',
@@ -28,7 +29,7 @@ const ManageAppointments = () => {
   const fetchAppointments = async () => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/allAppointments.php',
+        `${APP_URL}/allAppointments.php`,
         {
           method: 'GET',
           headers: {
@@ -59,7 +60,7 @@ const ManageAppointments = () => {
   const handleSaveEdit = async (appointmentId) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/allAppointments.php',
+        `${APP_URL}/allAppointments.php`,
         {
           method: 'POST',
           headers: {
@@ -88,7 +89,7 @@ const ManageAppointments = () => {
   const handleDelete = async (appointmentId) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/allAppointments.php',
+        `${APP_URL}/allAppointments.php`,
         {
           method: 'POST',
           headers: {

@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import { APP_URL } from '../App';
 
 export default function Login() {
   const linkStyle = {
@@ -24,13 +25,12 @@ export default function Login() {
 
     if (emailRegex.test(username)) {
       try {
-        const response = await fetch('http://localhost/backend/api/Login.php', {
+        const response = await fetch('http://localhost/medicare/backend/api/Login.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(formData),
-          credentials: 'include',
         });
 
         if (response.status === 200) {
@@ -61,14 +61,13 @@ export default function Login() {
     } else if (!isNaN(username)) {
       try {
         const response = await fetch(
-          'http://localhost/backend/api/Loginid.php',
+          `${APP_URL}/Loginid.php`,
           {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData),
-            credentials: 'include',
           }
         );
 

@@ -14,6 +14,7 @@ import diabetesImage from '../../images/sugar.png';
 import heartHealthIssuesImage from '../../images/heart.png';
 import arthritisImage from '../../images/bone.png';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 function HealthRecordPage() {
   const [userId, setUserId] = useState(null);
@@ -41,7 +42,7 @@ function HealthRecordPage() {
   async function fetchHealthRecord(UserID) {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/fetchHealthRecord.php?UserID=${UserID}`
+        `${APP_URL}/fetchHealthRecord.php?UserID=${UserID}`
       );
       if (!response.ok) {
         throw new Error('Health record not found, starting in edit mode.');
@@ -75,7 +76,7 @@ function HealthRecordPage() {
 
     try {
       const response = await fetch(
-        `http://localhost/backend/api/saveHealthRecord.php`,
+        `${APP_URL}/saveHealthRecord.php`,
         {
           method: 'POST',
           headers: {

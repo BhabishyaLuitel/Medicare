@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { styled } from '@mui/system';
 import PatientSidebar from '../../components/PatientSidebar';
+import { APP_URL } from '../../App';
 
 const Content = styled('div')({
   marginLeft: '10px',
@@ -41,7 +42,7 @@ const AppointmentsPage = () => {
   const fetchAppointments = async (userID) => {
     try {
       const response = await fetch(
-        `http://localhost/backend/api/scheduleAppointment.php?PatientID=${userID}`,
+        `${APP_URL}/scheduleAppointment.php?PatientID=${userID}`,
         {
           method: 'GET',
           headers: {
@@ -64,7 +65,7 @@ const AppointmentsPage = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        'http://localhost/backend/api/scheduleAppointment.php',
+        `${APP_URL}/scheduleAppointment.php`,
         {
           method: 'POST',
           headers: {
@@ -105,7 +106,7 @@ const AppointmentsPage = () => {
   const handleSaveEdit = async (appointmentId) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/scheduleAppointment.php',
+        `${APP_URL}/scheduleAppointment.php`,
         {
           method: 'POST',
           headers: {
@@ -134,7 +135,7 @@ const AppointmentsPage = () => {
   const handleDelete = async (appointmentId) => {
     try {
       const response = await fetch(
-        'http://localhost/backend/api/scheduleAppointment.php',
+        `${APP_URL}/scheduleAppointment.php`,
         {
           method: 'POST',
           headers: {

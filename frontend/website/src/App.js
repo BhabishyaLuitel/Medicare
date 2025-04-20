@@ -35,6 +35,7 @@ import ManageHealthAdmins from './pages/admin/ManageHealthAdmins';
 import ProfileAdmin from './pages/admin/AdminProfile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import DataOversight from './pages/admin/DataOversight';
+import PatientRegistration from './pages/admin/PatientRegistration';
 
 
 import PharmacistProfile from './pages/Pharmacist/PharmacistProfile';
@@ -64,11 +65,16 @@ import HealthRecordPage from './pages/user/HealthRecordPage';
 import SymptomChecker from './pages/user/SymptomChecker';
 import MedicationReminder from './pages/user/MedicationReminder';
 import AppointmentsPage from './pages/user/AppointmentsPage'
-import PatientCommunity from './pages/user/PatientCommunity'
 import PatientSingleBlogPage from './pages/user/PatientSingleBlogPage'
 import PatientMyBlogs from './pages/user/PatientMyBlogs'
 import PatientAddBlog from './pages/user/PatientAddBlog'
 import PatientPrescription from './pages/user/PatientPrescription'
+import ChatAdmin from './pages/chatAdmin';
+import HealthCareChat from './pages/chatHealthCare';
+import HealthcareAdminChat from './pages/healthcareAdminChat';
+import ChatPharma from './pages/chatPharma';
+
+export const APP_URL = "http://localhost/medicare/backend/api";
 
 function App() {
   return (
@@ -87,6 +93,10 @@ function App() {
         <Route path='/ResetPassword' element={<ResetPassword/>}/>
 
         <Route path="/Chat" element={<Chat/>} />
+        <Route path="/admin-chat" element={<ChatAdmin/>} />
+        <Route path="/healthcare-chat" element={<HealthCareChat/>} />
+        <Route path="/health-admin-chat" element={<HealthcareAdminChat/>} />
+        <Route path="/pharma-chat" element={<ChatPharma/>} />
 
         <Route path="/ManagePatientAdmin" element={<ManagePatientAdmin />} />
         <Route path="/ManagePharmacistAdmin" element={<ManagePharmacistAdmin />} />
@@ -95,6 +105,7 @@ function App() {
         <Route path="/ProfileAdmin" element={<ProfileAdmin />} />
         <Route path="/AdminDashboard" element={<AdminDashboard />} />
         <Route path="/DataOversight" element={<DataOversight />} />
+        <Route path="/register-patient" element={<PatientRegistration />} />
 
         <Route path="/PharmacistProfile" element={<PharmacistProfile />} />
         <Route path="/PharmacistPrescriptionForm" element={<PharmacistPrescriptionForm />} />
@@ -110,7 +121,6 @@ function App() {
         <Route path="/PrescriptionForm" element={<PrescriptionForm />} />
         <Route path="/ManageAppointments" element={<ManageAppointments />} />
         <Route path="/PersonalRecords" element={<PersonalRecords />} />
-        <Route path="/HealthcareProviderCommunity" element={<HealthcareProviderCommunity />} />
         <Route path="/HealthcareProviderSingleBlogPage/:id" element={<HealthcareProviderSingleBlogPage />} />
         <Route path="/HealthcareProviderMyBlogs" element={<HealthcareProviderMyBlogs />} />
         <Route path="/HealthcareProviderAddBlog" element={<HealthcareProviderAddBlog />} />
@@ -121,7 +131,6 @@ function App() {
         <Route path="/SymptomChecker" element={<SymptomChecker />} />
         <Route path="/MedicationReminder" element={<MedicationReminder />} />
         <Route path="/AppointmentsPage" element={<AppointmentsPage />} />
-        <Route path="/PatientCommunity" element={<PatientCommunity />} />
         <Route path="/PatientSingleBlogPage/:id" element={<PatientSingleBlogPage />} />
         <Route path="/PatientMyBlogs" element={<PatientMyBlogs />} />
         <Route path="/PatientAddBlog" element={<PatientAddBlog />} />
