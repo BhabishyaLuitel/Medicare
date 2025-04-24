@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 16, 2024 at 05:59 PM
--- Server version: 5.7.44
--- PHP Version: 8.1.27
+-- Host: localhost
+-- Generation Time: Apr 20, 2025 at 09:02 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `your_hms`
+-- Database: `medicare`
 --
 
 -- --------------------------------------------------------
@@ -30,10 +30,10 @@ SET time_zone = "+00:00";
 CREATE TABLE `chat_list` (
   `id` int(11) NOT NULL,
   `to_id` int(255) DEFAULT NULL,
-  `message` text,
+  `message` text DEFAULT NULL,
   `from_id` int(255) DEFAULT NULL,
   `datetime` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `chat_list`
@@ -46,7 +46,31 @@ INSERT INTO `chat_list` (`id`, `to_id`, `message`, `from_id`, `datetime`) VALUES
 (357, 6, 'Great', 2, '2024-04-15 01:27:14'),
 (358, 6, 'whatsup', 2, '2024-04-15 01:38:59'),
 (359, 2, 'great', 6, '2024-04-15 01:39:24'),
-(360, 6, 'ki', 2, '2024-04-15 01:40:04');
+(360, 6, 'ki', 2, '2024-04-15 01:40:04'),
+(361, 2, 'hello\r\n', 889, '2025-04-20 10:13:10');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inventory`
+--
+
+CREATE TABLE `inventory` (
+  `ID` int(11) NOT NULL,
+  `MedicineName` varchar(255) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `ExpiryDate` date NOT NULL,
+  `Price` decimal(10,2) NOT NULL,
+  `CreatedAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`ID`, `MedicineName`, `Quantity`, `ExpiryDate`, `Price`, `CreatedAt`) VALUES
+(3, 'Acetaminophen.', 99, '2026-10-10', 9900.00, '2025-04-20 06:59:58'),
+(4, 'Ativan.', 10, '2025-10-02', 1000.00, '2025-04-20 07:00:44');
 
 -- --------------------------------------------------------
 
@@ -57,11 +81,11 @@ INSERT INTO `chat_list` (`id`, `to_id`, `message`, `from_id`, `datetime`) VALUES
 CREATE TABLE `tblAppointments` (
   `AppointmentID` int(10) NOT NULL,
   `PatientID` int(10) DEFAULT NULL,
-  `DoctorName` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `DoctorName` varchar(255) DEFAULT NULL,
   `AppointmentDate` date DEFAULT NULL,
-  `TimeSlot` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Description` text COLLATE utf8mb4_unicode_ci,
-  `Status` enum('Scheduled','Cancelled','Completed') COLLATE utf8mb4_unicode_ci DEFAULT 'Scheduled'
+  `TimeSlot` varchar(50) DEFAULT NULL,
+  `Description` text DEFAULT NULL,
+  `Status` enum('Scheduled','Cancelled','Completed') DEFAULT 'Scheduled'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -69,7 +93,7 @@ CREATE TABLE `tblAppointments` (
 --
 
 INSERT INTO `tblAppointments` (`AppointmentID`, `PatientID`, `DoctorName`, `AppointmentDate`, `TimeSlot`, `Description`, `Status`) VALUES
-(6, 1, 'Dr. Javier Hernandez', '2024-05-06', '01:00 PM', 'I am feeling sick.', 'Scheduled'),
+(6, 1, 'Dr. Javier Hernandez', '2024-05-06', '01:00 PM', 'I am feeling sick.', 'Completed'),
 (7, 1, 'Dr. Rachel Patel', '2024-04-13', '09:00 AM', 'This will automatically update past appointments.', 'Cancelled');
 
 -- --------------------------------------------------------
@@ -83,8 +107,8 @@ CREATE TABLE `tblBlogs` (
   `Title` varchar(255) NOT NULL,
   `Content` text NOT NULL,
   `UserID` int(10) NOT NULL,
-  `CreationDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `CreationDate` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblBlogs`
@@ -108,8 +132,8 @@ CREATE TABLE `tblComments` (
   `BlogID` int(10) NOT NULL,
   `UserID` int(10) NOT NULL,
   `Comment` text NOT NULL,
-  `CommentDate` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `CommentDate` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblComments`
@@ -129,11 +153,11 @@ INSERT INTO `tblComments` (`CommentID`, `BlogID`, `UserID`, `Comment`, `CommentD
 
 CREATE TABLE `tblfacilities` (
   `FacilityID` int(11) NOT NULL,
-  `ICU_Beds` int(11) DEFAULT '0',
-  `Normal_Rooms` int(11) DEFAULT '0',
-  `Ambulances` int(11) DEFAULT '0',
-  `XRay_Rooms` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `ICU_Beds` int(11) DEFAULT 0,
+  `Normal_Rooms` int(11) DEFAULT 0,
+  `Ambulances` int(11) DEFAULT 0,
+  `XRay_Rooms` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblfacilities`
@@ -150,12 +174,12 @@ INSERT INTO `tblfacilities` (`FacilityID`, `ICU_Beds`, `Normal_Rooms`, `Ambulanc
 
 CREATE TABLE `tblpersonalrecords` (
   `UserID` int(10) NOT NULL,
-  `BP` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Diabetes` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `HeartHealthIssues` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Arthritis` varchar(3) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Allergies` text COLLATE utf8mb4_unicode_ci,
-  `OtherIssues` text COLLATE utf8mb4_unicode_ci
+  `BP` varchar(3) DEFAULT NULL,
+  `Diabetes` varchar(3) DEFAULT NULL,
+  `HeartHealthIssues` varchar(3) DEFAULT NULL,
+  `Arthritis` varchar(3) DEFAULT NULL,
+  `Allergies` text DEFAULT NULL,
+  `OtherIssues` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -173,10 +197,10 @@ INSERT INTO `tblpersonalrecords` (`UserID`, `BP`, `Diabetes`, `HeartHealthIssues
 
 CREATE TABLE `tblPrescriptions` (
   `prescription_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
   `medicines` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `prescribedBy` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pharmacist` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prescribedBy` varchar(255) NOT NULL,
+  `pharmacist` varchar(255) NOT NULL,
   `user_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -207,7 +231,7 @@ INSERT INTO `tblPrescriptions` (`prescription_id`, `name`, `medicines`, `prescri
 CREATE TABLE `tblreminders` (
   `reminderID` int(11) NOT NULL,
   `userID` int(11) DEFAULT NULL,
-  `reminderName` text COLLATE utf8mb4_unicode_ci,
+  `reminderName` text DEFAULT NULL,
   `reminderTime` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -233,22 +257,22 @@ CREATE TABLE `tblusers` (
   `Password` varchar(200) DEFAULT NULL,
   `LastName` varchar(255) DEFAULT NULL,
   `UserType` varchar(255) DEFAULT NULL,
-  `code` mediumint(50) NOT NULL,
-  `status` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `code` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'Verified'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `tblusers`
 --
 
 INSERT INTO `tblusers` (`ID`, `FirstName`, `Email`, `ContactNumber`, `Password`, `LastName`, `UserType`, `code`, `status`) VALUES
-(1, 'Sample', 'patient@gmail.com', 8320930119, '12345678', 'One', 'Patient', 0, 'verified'),
-(2, 'Admin', 'admin@gmail.com', 8320930118, '12345678', 'Shah', 'Admin', 0, 'verified'),
-(3, 'HealthAdminOne', 'healthadmin@gmail.com', 8320930113, '12345678', 'One', 'HealthAdminstrator', 0, 'verified'),
-(4, 'PharmacistOne', 'pharmacist@gmail.com', 8320930128, '12345678', 'Main', 'Pharmacist', 0, 'verified'),
-(6, 'Provider', 'healthcare@mail.com', 8320930110, '12345678', 'Healthcare', 'HealthcareProvider', 0, 'verified'),
-(7, 'Provider 1', 'john@example.com', 1234567890, 'password123', 'Doe', 'HealthcareProvider', 0, 'verified'),
-(8, 'Vatsal', 'vatsalcshah@gmail.com', 8320930118, '12345678', 'Shah', 'Patient', 0, 'verified');
+(1, 'Sample', 'patient@gmail.com', 8320930119, '12345678', 'One', 'Patient', '0', 'verified'),
+(2, 'Admin', 'admin@gmail.com', 8320930118, '12345678', 'Shah', 'Admin', '0', 'verified'),
+(3, 'HealthAdminOne', 'healthadmin@gmail.com', 8320930113, '12345678', 'One', 'HealthAdminstrator', '0', 'verified'),
+(4, 'PharmacistOne', 'pharmacist@gmail.com', 8320930128, '12345678', 'Main', 'Pharmacist', '0', 'verified'),
+(6, 'Provider', 'healthcare@mail.com', 8320930110, '12345678', 'Healthcare', 'HealthcareProvider', '0', 'verified'),
+(7, 'Provider 1', 'john@example.com', 1234567890, 'password123', 'Doe', 'HealthcareProvider', '0', 'verified'),
+(8, 'Vatsal', 'vatsalcshah@gmail.com', 8320930118, '12345678', 'Shah', 'Patient', '0', 'verified');
 
 --
 -- Indexes for dumped tables
@@ -259,6 +283,12 @@ INSERT INTO `tblusers` (`ID`, `FirstName`, `Email`, `ContactNumber`, `Password`,
 --
 ALTER TABLE `chat_list`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `inventory`
+--
+ALTER TABLE `inventory`
+  ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `tblAppointments`
@@ -322,7 +352,13 @@ ALTER TABLE `tblusers`
 -- AUTO_INCREMENT for table `chat_list`
 --
 ALTER TABLE `chat_list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=361;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=362;
+
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tblAppointments`
@@ -364,7 +400,7 @@ ALTER TABLE `tblreminders`
 -- AUTO_INCREMENT for table `tblusers`
 --
 ALTER TABLE `tblusers`
-  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=892;
 
 --
 -- Constraints for dumped tables

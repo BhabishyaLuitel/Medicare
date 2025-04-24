@@ -150,6 +150,14 @@ export default function PharmacistSidebar() {
                   Patient History
                 </CustomLink>
               </li>
+              <li className="nav-item">
+                <CustomLink
+                  to="/PharmacistInventory"
+                  className="nav-link"
+                >
+                  Pharmacist Inventory
+                </CustomLink>
+              </li>
             </li>
             <li className="nav-item nav-category">
               <span className="nav-link">Chat</span>
